@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #06070b;
+  --foreground: #ededed;
 }
 
 @theme inline {
@@ -10,17 +10,148 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-display: var(--font-display);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+::selection {
+  background: rgba(139, 92, 246, 0.4);
+  color: #fff;
+}
+
+/* ---------- Keyframes ---------- */
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 200% center;
+  }
+  to {
+    background-position: -200% center;
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ---------- Utility classes ---------- */
+
+.animate-fade-up {
+  animation: fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-float {
+  animation: float 7s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float 11s ease-in-out infinite;
+}
+
+.animate-marquee {
+  animation: marquee 36s linear infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3.5s ease-in-out infinite;
+}
+
+.text-gradient {
+  background: linear-gradient(
+    90deg,
+    #a78bfa 0%,
+    #e879f9 25%,
+    #818cf8 50%,
+    #e879f9 75%,
+    #a78bfa 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 7s linear infinite;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+}
+
+.grid-bg {
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.04) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(
+    ellipse 90% 60% at 50% 0%,
+    black 40%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    ellipse 90% 60% at 50% 0%,
+    black 40%,
+    transparent 100%
+  );
+}
+
+.glow-card {
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    background-color 0.25s ease;
+}
+
+.glow-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(167, 139, 250, 0.4);
+  background-color: rgba(255, 255, 255, 0.05);
 }
